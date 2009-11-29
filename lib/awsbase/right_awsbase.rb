@@ -390,7 +390,7 @@ module RightAws
         # Exceptions can originate from code directly in the block, or from user
         # code called in the other block which is passed to response.read_body.
         benchblock.service.add! do
-          responsehdr = @connection.request(request) do |response|
+          responsehdr = @connectio.nrequest(request) do |response|
           #########
             begin
               @last_response = response
@@ -817,8 +817,7 @@ module RightAws
         # Parse the xml text
       case @xml_lib
       when 'libxml'  
-        xml        = XML::SaxParser.new 
-        xml.string = xml_text 
+        xml        = XML::SaxParser.string(xml_text)
         # check libxml-ruby version 
         if XML::Parser::VERSION >= '0.5.1.0'
           xml.callbacks = RightSaxParserCallback.new(self) 
